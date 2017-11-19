@@ -1,0 +1,24 @@
+{
+  "name": "dryrouter",
+  "version": "1.0.0",
+  "description": "Intended to remove filler from setting up a router for node traffic",
+  "main": "index.js",
+  "dependencies": {
+    "formatrequest": "git+https://github.com/jacksonStone/formatRequest.git",
+    "keykeeper": "git+https://github.com/jacksonStone/keyKeeper.git"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacksonStone/DRYRouter.git"
+  },
+  "author": "",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jacksonStone/DRYRouter/issues"
+  },
+  "homepage": "https://github.com/jacksonStone/DRYRouter#readme"
+}
