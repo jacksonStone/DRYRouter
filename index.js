@@ -1,10 +1,13 @@
 const { getController } = require('./trafficControl')
 const { initial, attachBody } = require('formatrequest')
 const { verify } = require('keykeeper')
+const mapStaticContent = require('./mapStaticContent');
+const staticContent = {};
 let defaultRoutes;
-const handleDefaultRoutes = (req)=> {
-	if(defaultRoutes && defaultRoutes[req.url]) {
-		return defaultRoutes[req.url]();
+
+const handleStaticContent = (req)=> {
+	if(staticContent && staticContent[req.url]) {
+		return staticContent[req.url];
 	} else {
 		return false;
 	}
@@ -19,10 +22,10 @@ const router = function(req, res) {
 	const formattedReq = initial(req);
 	const controller = getController(formattedReq);
 	if(!controller) {
-		let defaultRouteResult = handleDefaultRoutes(req);
-		if (defaultRouteResult) { 
-			res.writeHead(200);
-			return res.end(defaultRouteResult);
+		let staticContent = handleStaticContent(req);
+		if (staticContent) {
+			res.writeHead(200, staticContent.headers || {});
+			return res.end(staticContent.body);
 		}
 		res.writeHead(404); 
 		return res.end('Invalid Route');
@@ -63,8 +66,8 @@ const router = function(req, res) {
 		});
 }
 
-router.setDefaultRoutes = function(routes){
-	defaultRoutes = routes;
+router.setStaticContentMapping = (map) => {
+	mapStaticContent(map, staticContent);
 }
 
 module.exports = router;

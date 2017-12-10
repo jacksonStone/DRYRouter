@@ -4,7 +4,9 @@
   "description": "Intended to remove filler from setting up a router for node traffic",
   "main": "index.js",
   "dependencies": {
+    "app-root-path": "^2.0.1",
     "formatrequest": "git+https://github.com/jacksonStone/formatRequest.git",
+    "glob": "^7.1.2",
     "keykeeper": "git+https://github.com/jacksonStone/keyKeeper.git"
   },
   "devDependencies": {},

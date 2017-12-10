@@ -1,5 +1,10 @@
 const routeMapping = {};
-const controllers = require('../../server/controllers');
+let controllers = [];
+try {
+	controllers = require('../../server/controllers');
+}
+catch(e){}
+
 for(let i in controllers) {
 	let c = controllers[i];
 	let key = ((c.method || 'get')).toLowerCase() + ' ' + c.url.toLowerCase();
