@@ -7,7 +7,6 @@
 // }
 const glob = require("glob");
 const appRoot = require('app-root-path').toString();
-console.log(appRoot);
 
 module.exports = function(map, staticContent) {
 	map.forEach((v, i) => {
