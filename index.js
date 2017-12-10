@@ -70,6 +70,10 @@ router.setStaticContentMapping = (map) => {
 	mapStaticContent(map, staticContent);
 }
 
+router.getStaticFile = (name) => {
+	return staticContent[name]
+}
+
 module.exports = router;
 
 
