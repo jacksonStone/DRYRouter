@@ -1,8 +1,15 @@
 const { getController } = require('./trafficControl')
 const { initial, attachBody } = require('formatrequest')
 const { verify } = require('keykeeper')
-
-var router = function(req, res) {
+let defaultRoutes;
+const handleDefaultRoutes = (req)=> {
+	if(defaultRoutes && defaultRoutes[req.url]) {
+		return defaultRoutes[req.url]();
+	} else {
+		return false;
+	}
+}
+const router = function(req, res) {
 
 	if(!verify(req)) {
 		res.writeHead(401);
@@ -12,6 +19,11 @@ var router = function(req, res) {
 	const formattedReq = initial(req);
 	const controller = getController(formattedReq);
 	if(!controller) {
+		let defaultRouteResult = handleDefaultRoutes(req);
+		if (defaultRouteResult) { 
+			res.writeHead(200);
+			return res.end(defaultRouteResult);
+		}
 		res.writeHead(404); 
 		return res.end('Invalid Route');
 	}
@@ -51,6 +63,10 @@ var router = function(req, res) {
 		});
 }
 
+router.setDefaultRoutes = function(routes){
+	defaultRoutes = routes;
+}
 
 module.exports = router;
+
 
